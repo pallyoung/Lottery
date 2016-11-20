@@ -6,6 +6,7 @@ import {
     ListView,
     Text,
     PixelRatio,
+    ScrollView,
     TouchableOpacity
 } from 'react-native';
 import mlux from 'mlux';
@@ -18,16 +19,21 @@ export default class BuyLottery extends Component {
 
     }
     render() {
-        return <View >
+        return <ScrollView style = {{flex:1,flexDirection:'column',marginHorizontal:16}} >
             <BallSelector type='red'
                 onSelect={(select) => {
                     this.red = select;
                 } } />
+            <View style = {{
+                height:2,
+                backgroundColor:'#efefef',
+                marginVertical:16
+            }}/>
             <BallSelector type='blue'
                 onSelect={(select) => {
                     this.blue = select[0];
                 } } />
-        </View>
+        </ScrollView>
     }
 
 }
