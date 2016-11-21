@@ -11,7 +11,7 @@ import {
 import mlux from 'mlux';
 var Binder = mlux.Binder;
 import SSQController from './../../controller/SSQController'
-
+import Ball from './Ball';
 var colorPair = {
     red: '#8f3800',
     blue: '#0166b3'
@@ -19,34 +19,9 @@ var colorPair = {
 
 var titlePair = {
     red: '红球',
-    blue: '篮球'
+    blue: '蓝球'
 }
-class Ball extends Component {
-    constructor(...props) {
-        super(...props);
-    }
-    render() {
-        var type = this.props.type;
-        var isSelected = this.props.isSelected;
-        return (<TouchableOpacity
-            onPress={() => this.props.onPress(this.props.number)}
-            style={{
-                height: 30,
-                width: 30,
-                backgroundColor: isSelected ? colorPair[type] : 'white',
-                borderRadius: 100,
-                marginRight: 10,
-                marginBottom: 10,
-                borderWidth:1,
-                borderColor:colorPair[type],
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}><Text style={{
-                color: !isSelected ? colorPair[type] : 'white',
-            }}>{this.props.number}</Text></TouchableOpacity>);
-    }
-}
+
 class BaseBallSelector extends Component {
     constructor(...props) {
         super(...props);
@@ -54,7 +29,6 @@ class BaseBallSelector extends Component {
 
     }
     toogleSelect(index) {
-        console.log(index);
         let select = this.select;
         let i = select.indexOf(index);
         let count = this.props.type == 'red' ? 6 : 1;
