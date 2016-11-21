@@ -115,11 +115,22 @@ function getOpencodeByRand(){
     opencode.push(code);
     return opencode;
 }
+function createLottery(expect,opencode,time){
+    var buytime = time.getFullYear()+'-'
+            +(time.getMonth()+1)+'-'
+            +time.getDate()+' '+time.getHours()+':'
+            +time.getMinutes()+':'
+            +time.getSeconds();
+    return {
+        expect,opencode,buytime
+    }
+}
 var controllers = {
     checkLottery,
     parseOpencode,
     formatCode,
     getNextExpect,
-    getOpencodeByRand
+    getOpencodeByRand,
+    createLottery
 }
 export default controllers;

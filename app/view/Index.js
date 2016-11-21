@@ -7,7 +7,15 @@ import Window from './../react/view/Window';
 import RouteMap from './../routes/RouteMap';
 import Router from './../react/view/Router';
 import StoreMap from './../stores';
-console.log(StoreMap)
+import Storage from './../util/Storage';
+var storgaeTool = {
+    getter:function(name){
+        return Storage.getItem(name);
+    },
+    setter:function(name,value){
+        return Storage.setItem(name,value);
+    }
+}
 // const routeMap = {
 //     'test':{
 //         component:Start,
@@ -26,7 +34,7 @@ Router.setRouteMap(RouteMap);
 global.Routes = Router.routes;
 global.Router = Router;
 global.SM = mlux.StoreManager;
-
+SM.setStorageTool(storgaeTool);
 class Index extends Component {
     constructor(...props){
         super(...props);

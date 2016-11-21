@@ -22,7 +22,7 @@ export default class List extends Component {
         }
     }
     _renderRow(item, id, sid) {
-        return <Item key={id} dataSource={item} />
+        return <Item key={id} type = {this.props.type} dataSource={item} />
     }
     render() {
        return  (<ListView

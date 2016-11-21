@@ -18,9 +18,8 @@ export default class MyLottery extends Component{
     }
     render(){
         return (
-            <Binder bind = 'ssqMyRecord' context = {this}>
-                <List dataSource = {SM.ssqMyRecord.list}/>
-            </Binder>
+            <Binder bind = 'ssqMyRecord' 
+                render = {()=><List type = 'buy' dataSource = {SM.ssqMyRecord.list}/>}/>
         );
     }
     

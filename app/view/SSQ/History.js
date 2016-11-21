@@ -5,6 +5,7 @@ import {
     View,
     ListView,
     Text,
+    TextInput,
     PixelRatio,
     TouchableOpacity
 } from 'react-native';
@@ -17,19 +18,18 @@ export default class History extends Component {
     }
     componentDidMount() {
         if (SM.ssqList.list.length == 0) {
-            SM.ssqList.pump();
+            //SM.ssqList.pump();
         }
     }
     _renderRow(item, id, sid) {
         return <Item key={id} dataSource={item} />
     }
     render() {
-        return (<Binder bind='ssqList' context={this}>
-            {SM.ssqList.list.length != 0 && <List
-                dataSource={
-                   SM.ssqList.list
-                } /> || <View />}
-        </Binder>);
-
+        return <Binder 
+                render = {()=><List dataSource={
+                        SM.ssqList.list
+                    } />}
+                bind='ssqList' 
+                     />
     }
 }

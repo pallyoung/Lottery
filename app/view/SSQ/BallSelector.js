@@ -25,9 +25,15 @@ var titlePair = {
 class BaseBallSelector extends Component {
     constructor(...props) {
         super(...props);
-        this.select = [];
+        this.select = this.props.select;
 
     }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.select!=this.props.select){
+            this.select = nextProps.select;
+        }
+    }
+    
     toogleSelect(index) {
         let select = this.select;
         let i = select.indexOf(index);
@@ -71,7 +77,7 @@ class RedBallSelector extends Component {
 
     }
     render() {
-        return <BaseBallSelector type='red' onSelect={this.props.onSelect} />
+        return <BaseBallSelector type='red' select = {this.props.select} onSelect={this.props.onSelect} />
     }
 }
 class BlueBallSelector extends Component {
@@ -80,7 +86,7 @@ class BlueBallSelector extends Component {
 
     }
     render() {
-        return <BaseBallSelector type='blue' onSelect={this.props.onSelect} />
+        return <BaseBallSelector type='blue' select = {this.props.select} onSelect={this.props.onSelect} />
     }
 }
 export default class BallSelector extends Component {
@@ -95,10 +101,10 @@ export default class BallSelector extends Component {
             <View style={{
                 flexDirection: 'column'
             }}>
-                <View style = {{height:44,flexDirection:'row',alignItems:'center'}}>
+                <View style={{ height: 44, flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ color: colorPair[type] }}>{titlePair[type]}</Text>
                 </View>
-                {type == 'red' && <RedBallSelector onSelect={this.props.onSelect} /> || <BlueBallSelector onSelect={this.props.onSelect} />}
+                {type == 'red' && <RedBallSelector select = {this.props.select} onSelect={this.props.onSelect} /> || <BlueBallSelector select = {this.props.select} onSelect={this.props.onSelect} />}
             </View>)
     }
 

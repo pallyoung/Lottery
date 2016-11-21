@@ -58,6 +58,7 @@ export default class Item extends Component {
     }
     render() {
         let dataSource = this.props.dataSource;
+        var opentime = this.props.type=='buy'?dataSource.buytime:dataSource.opentime;
         return (
             <View style={{
                 height: 60
@@ -70,7 +71,7 @@ export default class Item extends Component {
                 }}>
                     <Text style={{
                         color: '#ac9b6d'
-                    }}>第{dataSource.expect}期  {this._formatOpenTime(dataSource.opentime)}</Text>
+                    }}>第{dataSource.expect}期  {this._formatOpenTime(opentime)}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <BallList balls={dataSource.opencode} />
