@@ -9,11 +9,29 @@ import {
     ScrollView,
     TouchableOpacity
 } from 'react-native';
-import mlux from 'mlux';
-var Binder = mlux.Binder;
+import { Binder, createStore, type } from 'mlux';
 import BallSelector from './BallSelector';
 import SSQController from './../../controller/SSQController';
 import Ball from './Ball';
+class BallSelect extends Component {
+    constructor(...props) {
+        super(...props);
+    }
+    render() {
+        return <View style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            marginVertical: 5
+        }} >
+            {this.props.red.map((number, i) => {
+                return <Ball isSelected={true} type='red' number={number} key={'red' + i} />
+            })}
+            {this.props.blue.map((number, i) => {
+                return <Ball isSelected={true} type='blue' number={number} key={'blue' + i} />
+            })}
+        </View>
+    }
+}
 class Button extends Component {
     constructor(...props) {
         super(...props);
@@ -38,11 +56,23 @@ class Button extends Component {
 export default class BuyLottery extends Component {
     constructor(...props) {
         super(...props);
-        this.red = [];
-        this.blue = [];
+        this.red = createStore({
+            name: 'red',
+            data: {
+                value: []
+            }
+        });
+        this.blue = createStore({
+            name: 'blue',
+            data: {
+                value: []
+            }
+        });
     }
     render() {
-        var nextExpect = SSQController.getNextExpect()
+        var nextExpect = SSQController.getNextExpect();
+        var BinderBallSelector = Binder.createClass(BallSelector);
+        var BinderBallSelect = Binder.createClass(BallSelect);
         return <View style={{ flex: 1, flexDirection: 'column' }} >
             <View style={{
                 height: 44,
@@ -59,79 +89,82 @@ export default class BuyLottery extends Component {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 style={{ flex: 1, flexDirection: 'column', marginHorizontal: 16 }} >
-                <BallSelector 
-                    select = {this.red}
-                    type='red'
-                    onSelect={(select) => {
-                        this.red = select.sort();
-                        this.forceUpdate();
-                    } } />
+                <BinderBallSelector
+                    bind={this.red}
+                    getProps={() => {
+                        return {
+                            select: this.red.value,
+                            type: 'red',
+                            onSelect: (select) => {
+                                this.red.value = select.sort().slice();
+                            }
+                        }
+                    } }
+                    />
                 <View style={{
                     height: 2,
                     backgroundColor: '#efefef',
                     marginVertical: 16
                 }} />
-                <BallSelector 
-                    select = {this.blue}
-                    type='blue'
-                    onSelect={(select) => {
-                        this.blue = select;
-                        this.forceUpdate();
+                <BinderBallSelector
+                    bind={this.blue}
+                    getProps={() => {
+                        return {
+                            select: this.blue.value,
+                            type: 'blue',
+                            onSelect: (select) => {
+                                this.blue.value = select.sort().slice();
+                            }
+                        }
                     } } />
-
                 <View
                     style={{
                         marginVertical: 5
                     }} >
                     <Text>投注信息</Text>
                 </View>
-                <View style={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    marginVertical: 5
-                }} >
-                    {this.red.map((number, i) => {
-                        return <Ball isSelected={true} type='red' number={number} key={'red' + i} />
-                    })}
-                    {this.blue.map((number, i) => {
-                        return <Ball isSelected={true} type='blue' number={number} key={'blue' + i} />
-                    })}
-                </View>
+                <BinderBallSelect
+                    bind={[this.blue,this.red]}
+                    getProps={() => {
+                        return {
+                            red: this.red.value,
+                            blue: this.blue.value
+                        }
+                    } } 
+                     />
                 <View style={{
                     flexDirection: 'row',
                     height: 44
                 }} >
                     <Button
-                        text = '立即投注'
-                        onPress = {
+                        text='立即投注'
+                        onPress={
                             () => {
-                                if(this.red.length+this.blue.length!=7){
+                                if (this.red.value.length + this.blue.value.length != 7) {
                                     return;
                                 }
                                 var now = new Date();
                                 var lottery = SSQController.createLottery(
                                     nextExpect,
-                                    this.red.join(',')+'+'+this.blue[0],
+                                    this.red.value.join(',') + '+' + this.blue.value[0],
                                     now
-                                    );
+                                );
                                 var myRecordList = SM.ssqMyRecord.list;
                                 myRecordList.push(lottery);
                                 SM.ssqMyRecord.list = myRecordList;
-                                this.red = [];
-                                this.blue = [];
-                                this.forceUpdate();
+                                this.red.value = [];
+                                this.blue.value = [];
                             }
-                        }/>
+                        } />
                     <Button
-                        text = '机选一注'
-                        onPress = {
+                        text='机选一注'
+                        onPress={
                             () => {
                                 var opencode = SSQController.getOpencodeByRand();
-                                this.red = opencode.slice(0, 6);
-                                this.blue = opencode.slice(-1);
-                                this.forceUpdate();
+                                this.red.value = opencode.slice(0, 6);
+                                this.blue.value = opencode.slice(-1);
                             }
-                        }/>
+                        } />
                 </View>
             </ScrollView>
 

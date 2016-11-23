@@ -12,13 +12,14 @@ import {
     PixelRatio,
     TouchableOpacity
 } from 'react-native';
-import mlux from 'mlux';
-var Binder = mlux.Binder;
+import {Binder} from 'mlux';
 
 import History from './History';
 import MyLottery from './MyLottery';
 import BuyLottery from './BuyLottery';
 import ToolBar from './ToolBar';
+
+var BinderHistory = Binder.createClass(History);
 
 export default class SSQIndex extends Component {
     constructor(...props) {
@@ -32,7 +33,7 @@ export default class SSQIndex extends Component {
         return (
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <View style={{ flex: 1, flexDirection: 'column' }}>
-                    {this.state.selectedIndex==1&&<History />}
+                    {this.state.selectedIndex==1&& <BinderHistory bind = {SM.ssqList}/>}
                     {this.state.selectedIndex==2&&<MyLottery />}
                     {this.state.selectedIndex==4&&<BuyLottery />}
                 </View>

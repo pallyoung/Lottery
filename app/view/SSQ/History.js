@@ -25,11 +25,8 @@ export default class History extends Component {
         return <Item key={id} dataSource={item} />
     }
     render() {
-        return <Binder 
-                render = {()=><List dataSource={
+        return <List dataSource={
                         SM.ssqList.list
-                    } />}
-                bind='ssqList' 
-                     />
+                    } />
     }
 }
