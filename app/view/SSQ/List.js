@@ -17,9 +17,7 @@ export default class List extends Component {
         super(...props);
     }
     componentDidMount() {
-        if (SM.ssqList.list.length == 0) {
-            SM.ssqList.pump();
-        }
+
     }
     _renderRow(item, id, sid) {
         return <Item key={id} type = {this.props.type} dataSource={item} />

@@ -12,8 +12,8 @@ import {
     PixelRatio,
     TouchableOpacity
 } from 'react-native';
-import {Binder} from 'mlux';
-
+import {} from 'mlux';
+import Binder from 'react-mlux-binder';
 import History from './History';
 import MyLottery from './MyLottery';
 import BuyLottery from './BuyLottery';

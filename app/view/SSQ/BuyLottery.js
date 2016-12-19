@@ -9,7 +9,8 @@ import {
     ScrollView,
     TouchableOpacity
 } from 'react-native';
-import { Binder, createStore, type } from 'mlux';
+import { createStore, type } from 'mlux';
+import Binder from 'react-mlux-binder';
 import BallSelector from './BallSelector';
 import SSQController from './../../controller/SSQController';
 import Ball from './Ball';

@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import mlux from 'mlux';
-var Binder = mlux.Binder;
+import Binder from 'react-mlux-binder';
 import SSQController from './../../controller/SSQController'
 import Ball from './Ball';
 var colorPair = {

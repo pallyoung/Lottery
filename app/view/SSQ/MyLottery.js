@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import mlux from 'mlux';
-var Binder = mlux.Binder;
+import Binder from 'react-mlux-binder'
 
 import List from './List';
 export default class MyLottery extends Component{

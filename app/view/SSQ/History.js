@@ -10,7 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import mlux from 'mlux';
-var Binder = mlux.Binder;
+import Binder from 'react-mlux-binder'
 import List from './List';
 export default class History extends Component {
     constructor(...props) {
@@ -18,7 +18,7 @@ export default class History extends Component {
     }
     componentDidMount() {
         if (SM.ssqList.list.length == 0) {
-            //SM.ssqList.pump();
+            SM.ssqList.pump();
         }
     }
     _renderRow(item, id, sid) {

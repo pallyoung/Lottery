@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "fbemitter": "^2.1.1",
-    "mlux": "0.0.2",
+    "mlux": "0.2.0",
+    "react-mlux-binder":"*",
+    "react-native-storage-tool":"*",
     "react": "15.3.2",
     "react-native": "0.37.0"
   },

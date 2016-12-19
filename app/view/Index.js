@@ -1,19 +1,20 @@
 'use strict'
+
+import Window from './../react/view/Window';
+import Router from './../react/view/Router';
+import RouteMap from './../routes/RouteMap';
+import StoreMap from './../stores';
 import React, {Component, PropTypes} from 'react';
 import ReactNative,{View} from 'react-native';
-
 import mlux from 'mlux';
-import Window from './../react/view/Window';
-import RouteMap from './../routes/RouteMap';
-import Router from './../react/view/Router';
-import StoreMap from './../stores';
-import Storage from './../util/Storage';
+import Binder from 'react-mlux-binder';
+import StorageTool from 'react-native-storage-tool';
 var storgaeTool = {
     getter:function(name){
-        return Storage.getItem(name);
+        return StorageTool.getItem(name);
     },
     setter:function(name,value){
-        return Storage.setItem(name,value);
+        return StorageTool.setItem(name,value);
     }
 }
 // const routeMap = {
