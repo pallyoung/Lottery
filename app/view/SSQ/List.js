@@ -24,6 +24,7 @@ export default class List extends Component {
     }
     render() {
        return  (<ListView
+            showsVerticalScrollIndicator = {false}
             enableEmptySections = {true}
             style={{
                 marginHorizontal: 16,
