@@ -20,7 +20,7 @@ import BuyLottery from './BuyLottery';
 import ToolBar from './ToolBar';
 
 var BinderHistory = Binder.createClass(History);
-
+BinderHistory = History;
 export default class SSQIndex extends Component {
     constructor(...props) {
         super(...props);

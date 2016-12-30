@@ -14,6 +14,7 @@ import Binder from 'react-mlux-binder';
 import BallSelector from './BallSelector';
 import SSQController from './../../controller/SSQController';
 import Ball from './Ball';
+import {autoSize} from 'react-native-improver';
 class BallSelect extends Component {
     constructor(...props) {
         super(...props);
@@ -76,7 +77,7 @@ export default class BuyLottery extends Component {
         var BinderBallSelect = Binder.createClass(BallSelect);
         return <View style={{ flex: 1, flexDirection: 'column' }} >
             <View style={{
-                height: 44,
+                height: autoSize(44),
                 backgroundColor: '#f75549',
                 flexDirection: 'row',
                 justifyContent: 'center',

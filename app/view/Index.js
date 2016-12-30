@@ -9,6 +9,14 @@ import ReactNative,{View} from 'react-native';
 import mlux from 'mlux';
 import Binder from 'react-mlux-binder';
 import StorageTool from 'react-native-storage-tool';
+import {
+    setRNComponentBaseStyleSheet
+} from 'react-native-improver';
+setRNComponentBaseStyleSheet({
+    View:{
+       
+    }
+});
 var storgaeTool = {
     getter:function(name){
         return StorageTool.getItem(name);

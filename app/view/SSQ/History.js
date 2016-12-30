@@ -12,6 +12,7 @@ import {
 import mlux from 'mlux';
 import Binder from 'react-mlux-binder'
 import List from './List';
+
 export default class History extends Component {
     constructor(...props) {
         super(...props);
@@ -25,9 +26,8 @@ export default class History extends Component {
         return <Item key={id} dataSource={item} />
     }
     render() {
-        return <List
-                    dataSource={
-                        SM.ssqList.list
-                    } />
+        return Binder.createElement(List,[SM.ssqList],function(){
+            return {dataSource:SM.ssqList.list}
+        });
     }
 }
